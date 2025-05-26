@@ -1,0 +1,69 @@
+# Arquivos de ajuda
+HELP.md
+
+# Diretórios de build
+target/
+build/
+!**/src/main/**/target/
+!**/src/test/**/target/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# Maven
+.mvn/
+!.mvn/wrapper/maven-wrapper.jar
+*.log
+*.swp
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+.idea_modules/
+
+# Configurações específicas do IntelliJ
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/dictionaries/
+.idea/**/shelf/
+.idea/**/vcs.xml
+
+# Arquivos de cache e temporários
+*.class
+*.jar
+*.war
+*.ear
+*.db
+*.h2.db
+*.mv.db
+*.sqlite
+
+# Logs
+logs/
+*.pid
+*.seed
+hs_err_pid*
+
+# Configurações de IDEs alternativas
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings/
+.springBeans
+.sts4-cache
+
+### VS Code ###
+.vscode/
+
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db
+*.~lock.*
+~$*
+
+# Arquivos de teste
+test-output/
