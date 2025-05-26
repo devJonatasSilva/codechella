@@ -1,0 +1,39 @@
+name: PR Workflow
+
+on:
+  push:
+    branches:
+      - feature/*
+  pull_request:
+    branches:
+      - develop
+      - main
+
+jobs:
+  create-pr:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Create Pull Request to develop
+        uses: peter-evans/create-pull-request@v5
+        with:
+          branch: develop
+          title: "Merge feature branch to develop"
+          body: "This PR merges the feature branch into develop."
+
+  merge-to-main:
+    if: github.event_name == 'pull_request' && github.base_ref == 'develop'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Create Pull Request to main
+        uses: peter-evans/create-pull-request@v5
+        with:
+          branch: main
+          title: "Merge develop to main"
+          body: "This PR merges the develop branch into main."
