@@ -35,19 +35,22 @@ public class EventoService {
 
     public Mono<EventoDto> updateEvento(Long id, EventoDto eventoAtualizado) {
         return eventoRepository.findById(id)
+                .switchIfEmpty(Mono.error(new ChangeSetPersister.NotFoundException()))
                 .flatMap(evento -> {
-                    evento.setNome(eventoAtualizado.getNome());
-                    evento.setData(eventoAtualizado.getData());
-                    evento.setLocal(eventoAtualizado.getLocal());
+                    evento.setNome(eventoAtualizado.nome());
+                    evento.setTipo(eventoAtualizado.tipo());
+                    evento.setId(eventoAtualizado.id());
+                    evento.setData(eventoAtualizado.data());
+                    evento.setDescricao(eventoAtualizado.descricao());
                     return eventoRepository.save(evento);
                 })
-                .map(EventoDto::toEvento)
-                .switchIfEmpty(Mono.error(new ChangeSetPersister.NotFoundException()));
+                .map(EventoDto::toEvento);
+
     }
 
     public Mono<HttpStatus> deleteEvento(Long id) {
         return eventoRepository.findById(id)
-                .flatMap(evento -> eventoRepository.deleteById(evento.id())
+                .flatMap(evento -> eventoRepository.deleteById(evento.getId())
                         .thenReturn(HttpStatus.NO_CONTENT))
                 .switchIfEmpty(Mono.just(HttpStatus.NOT_FOUND));
     }

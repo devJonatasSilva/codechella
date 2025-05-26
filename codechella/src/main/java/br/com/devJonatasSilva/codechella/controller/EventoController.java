@@ -30,20 +30,17 @@ public class EventoController {
         return eventoService.getEventoById(id);
     }
 
-    // @PostMapping
     @PostMapping
     public Mono<EventoDto> createEvento(@RequestBody EventoDto eventoDto) {
         return eventoService.createEvento(eventoDto);
     }
 
     @PutMapping("/{id}")
-    public Mono<ResponseEntity<Evento>> updateEvento(
-            @Pathvariable Long id,
+    public Mono<EventoDto> updateEvento(
+            @PathVariable Long id,
             @RequestBody EventoDto eventoAtualizado
         ){
-        return eventoService.updateEvento(id, eventoAtualizado)
-                .map(evento -> ResponseEntity.ok(evento))
-                .defautIfEmpty(ResponseEntity.notFound().build());
+        return eventoService.updateEvento(id, eventoAtualizado);
     }
 
     // @DeleteMapping("/{id}")

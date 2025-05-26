@@ -23,7 +23,7 @@ public record EventoDto(
     }
 
     public static EventoDto toEvento(Evento evento) {
-        return new EventoDto(evento.id(),evento.tipo(), evento.nome());
+        return new EventoDto(evento.getId(),evento.getTipo(), evento.getNome());
     }
 
     public Evento toEntity() {
